@@ -14,7 +14,17 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   Map<String, int> counters = {};
 
   // Achievement milestones
-  final List<int> milestones = [100, 1000, 5000, 10000, 20000, 50000, 100000, 500000, 1000000];
+  final List<int> milestones = [
+    100,
+    1000,
+    5000,
+    10000,
+    20000,
+    50000,
+    100000,
+    500000,
+    1000000,
+  ];
 
   // Achievement data structure
   final Map<String, Map<String, dynamic>> achievementTypes = {
@@ -51,8 +61,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       100: 'بداية النور',
       1000: 'محبٌ للتسبيح',
       5000: 'لسان ذاكر',
-      10000: 'لسانٌ منوَّر',
-      20000: 'قلبٌ منزَّه',
+      10000: 'لسانٌ منوَّر',
+      20000: 'قلبٌ منزَّه',
       50000: 'روحٌ نقية',
       100000: 'دائمُ التسبيح',
       500000: 'بحرُ التسبيح',
@@ -60,9 +70,9 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     },
     'takbeer': {
       100: 'بداية التعظيم',
-      1000: 'لسانٌ مكبِّر',
-      5000: 'عبدٌ معظِّم',
-      10000: 'روحٌ مكبِّرة',
+      1000: 'لسانٌ مكبِّر',
+      5000: 'عبدٌ معظِّم',
+      10000: 'روحٌ مكبِّرة',
       20000: 'رايةُ التعظيم',
       50000: 'سابق بالتكبير',
       100000: 'رايةُ المجد',
@@ -87,7 +97,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       10000: 'روحٌ منكسرة',
       20000: 'عبدٌ مستغفر',
       50000: 'من أهلِ الإنابة',
-      100000: 'روحٌ نقَّاءة',
+      100000: 'روحٌ نقَّاءة',
       500000: 'بحرُ الاستغفار',
       1000000: 'تاجُ المستغفرين',
     },
@@ -125,10 +135,11 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       counters['isteghfar_counter'] = prefs.getInt('isteghfar_counter') ?? 0;
 
       // Calculate total
-      counters['total_counter'] = (counters['counter'] ?? 0) +
-          (counters['takbeer_counter'] ?? 0) +
-          (counters['ta7meed_counter'] ?? 0) +
-          (counters['isteghfar_counter'] ?? 0);
+      counters['total_counter'] =
+          (counters['counter'] ?? 0) +
+              (counters['takbeer_counter'] ?? 0) +
+              (counters['ta7meed_counter'] ?? 0) +
+              (counters['isteghfar_counter'] ?? 0);
     });
   }
 
@@ -155,7 +166,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       for (int milestone in milestones) {
         String achievementKey = 'achievement_${type}_$milestone';
 
-        if (currentCount >= milestone && !(unlockedAchievements[achievementKey] ?? false)) {
+        if (currentCount >= milestone &&
+            !(unlockedAchievements[achievementKey] ?? false)) {
           setState(() {
             unlockedAchievements[achievementKey] = true;
           });
@@ -176,28 +188,19 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       builder: (context) => AlertDialog(
         title: Text(
           '🎉 إنجاز جديد!',
-          style: TextStyle(
-            fontFamily: 'NotoBold',
-            fontSize: 20.sp,
-          ),
+          style: TextStyle(fontFamily: 'NotoBold', fontSize: 20.sp),
           textAlign: TextAlign.center,
         ),
         content: Text(
           'تهانينا! لقد حققت إنجازاً جديداً',
-          style: TextStyle(
-            fontFamily: 'Noto',
-            fontSize: 16.sp,
-          ),
+          style: TextStyle(fontFamily: 'Noto', fontSize: 16.sp),
           textAlign: TextAlign.center,
           textDirection: TextDirection.rtl,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text(
-              'رائع!',
-              style: TextStyle(fontFamily: 'Noto'),
-            ),
+            child: Text('رائع!', style: TextStyle(fontFamily: 'Noto')),
           ),
         ],
       ),
@@ -214,42 +217,53 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xfff9fafb),
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-          title: Text(
-            'الإنجازات',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontFamily: 'NotoBold',
-              color: Colors.black,
-              fontSize: 20.sp,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Color(0xfff9fafb),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            centerTitle: true,
+            automaticallyImplyLeading: false, // Disable default leading
+            title: Text(
+              'الإنجازات',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'NotoBold',
+                color: Colors.black,
+                fontSize: 20.sp,
+              ),
             ),
-          ),
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back_ios, color: Color(0xFF374151)),
-          ),
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Statistics card
-              _buildStatsCard(),
-              SizedBox(height: 24.h),
-
-              // Achievement sections for each type
-              for (String type in achievementTypes.keys) ...[
-                _buildAchievementSection(type),
-                SizedBox(height: 20.h),
-              ],
+            actions: [
+              IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.rotationY(3.1416), // π radians = 180°
+                  child: Icon(Icons.arrow_back_ios,color: Color(0xFF374151),),
+                ),
+                // icon: Icon(Icons.arrow_back_ios, color: Color(0xFF374151)),
+              ),
             ],
+          ),
+          body: SingleChildScrollView(
+            padding: EdgeInsets.all(16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Statistics card
+                _buildStatsCard(),
+                SizedBox(height: 24.h),
+
+                // Achievement sections for each type
+                for (String type in achievementTypes.keys) ...[
+                  _buildAchievementSection(type),
+                  SizedBox(height: 20.h),
+                ],
+              ],
+            ),
           ),
         ),
       ),
@@ -287,21 +301,47 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
             ),
           ),
           SizedBox(height: 16.h),
+
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildStatItem('التسبيح', counters['counter'] ?? 0, Color(0xFF3B82F6)),
-              _buildStatItem('التكبير', counters['takbeer_counter'] ?? 0, Color(0xFF8B5CF6)),
+              Expanded(
+                child: _buildStatItem(
+                  'التسبيح',
+                  counters['counter'] ?? 0,
+                  Color(0xFF3B82F6),
+                ),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: _buildStatItem(
+                  'التكبير',
+                  counters['takbeer_counter'] ?? 0,
+                  Color(0xFF8B5CF6),
+                ),
+              ),
             ],
           ),
           SizedBox(height: 12.h),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildStatItem('التحميد', counters['ta7meed_counter'] ?? 0, Color(0xFF10B981)),
-              _buildStatItem('الاستغفار', counters['isteghfar_counter'] ?? 0, Color(0xFFEF4444)),
+              Expanded(
+                child: _buildStatItem(
+                  'التحميد',
+                  counters['ta7meed_counter'] ?? 0,
+                  Color(0xFF10B981),
+                ),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: _buildStatItem(
+                  'الاستغفار',
+                  counters['isteghfar_counter'] ?? 0,
+                  Color(0xFFEF4444),
+                ),
+              ),
             ],
           ),
+
           SizedBox(height: 16.h),
           Container(
             padding: EdgeInsets.all(12.w),
@@ -339,13 +379,9 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
           height: 40.h,
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(20.r),
+            shape: BoxShape.circle,
           ),
-          child: Icon(
-            Icons.circle,
-            color: color,
-            size: 20.w,
-          ),
+          child: Icon(Icons.circle, color: color, size: 20.w),
         ),
         SizedBox(height: 8.h),
         Text(
@@ -429,12 +465,16 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: isUnlocked ? color.withOpacity(0.3) : Colors.grey.withOpacity(0.2),
+          color: isUnlocked
+              ? color.withOpacity(0.3)
+              : Colors.grey.withOpacity(0.2),
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
-            color: isUnlocked ? color.withOpacity(0.1) : Colors.black.withOpacity(0.05),
+            color: isUnlocked
+                ? color.withOpacity(0.1)
+                : Colors.black.withOpacity(0.05),
             blurRadius: 8.r,
             offset: Offset(0, 2.h),
           ),
@@ -450,7 +490,9 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
               width: 40.w,
               height: 40.h,
               decoration: BoxDecoration(
-                color: isUnlocked ? color.withOpacity(0.1) : Colors.grey.withOpacity(0.1),
+                color: isUnlocked
+                    ? color.withOpacity(0.1)
+                    : Colors.grey.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Icon(
@@ -480,7 +522,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                   ? '✓ مكتمل'
                   : '${_formatNumber(currentCount)} / ${_formatNumber(milestone)}',
               style: TextStyle(
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontFamily: 'Noto',
                 color: isUnlocked ? color : Colors.grey,
               ),
