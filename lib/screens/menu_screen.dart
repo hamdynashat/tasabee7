@@ -63,6 +63,7 @@ class _MenuScreenState extends State<MenuScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 InkWell(
+                  customBorder: CircleBorder(),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -82,6 +83,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 SizedBox(width: 15.w),
                 InkWell(
+                  customBorder: CircleBorder(),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -107,6 +109,7 @@ class _MenuScreenState extends State<MenuScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 InkWell(
+                  customBorder: CircleBorder(),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -128,6 +131,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 SizedBox(width: 15.w),
                 InkWell(
+                  customBorder: CircleBorder(),
                   onTap: () {
                     Navigator.push(
                       context,

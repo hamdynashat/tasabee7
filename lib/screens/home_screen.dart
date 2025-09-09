@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 20.h),
             Center(
               child: InkWell(
+                customBorder: CircleBorder(),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -42,6 +43,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             InkWell(
+              customBorder: CircleBorder(),
               onTap: () {
                 Navigator.push(
                   context,
@@ -73,6 +75,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 15.h), // Space between buttons
             InkWell(
+              customBorder: CircleBorder(),
               onTap: () {
                 Navigator.push(
                   context,
